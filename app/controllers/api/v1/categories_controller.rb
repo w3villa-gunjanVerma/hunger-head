@@ -1,11 +1,11 @@
 class Api::V1::CategoriesController < ApplicationController
+    before_action :set_category, only: [:show, :update]
     def index
         @categories = Category.all 
         render json: @categories, status: :ok
     end
 
     def show
-        @category = Category.find_by(id: params[:id])
         render json: @category, status: :ok
     end
 
@@ -15,12 +15,21 @@ class Api::V1::CategoriesController < ApplicationController
             render json: @category, status: :created
         else
             render json: {errors: @category.errors.full_messages},
-            status: :unprocessable_entity
+        end
+    end
+
+    def update
+        if !@category.update(category_params)
+            render json: { errors: @category.errors.full_messages }
+            render json: @category
         end
     end
 
     private
     def category_params
-        params.require(:category).permit(:name, :description)
+        params.permit(:name, :description)
+    end
+    def set_category
+        @category = Category.find_by(id: params[:id])
     end
 end
