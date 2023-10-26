@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         else
           render json: @user
         end
-      end
+    end
 
     def destroy
         @user.destroy
