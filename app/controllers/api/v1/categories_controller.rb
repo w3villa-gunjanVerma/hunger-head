@@ -14,7 +14,7 @@ class Api::V1::CategoriesController < ApplicationController
         if @category.save
             render json: @category, status: :created
         else
-            render json: {errors: @category.errors.full_messages},
+            render json: {errors: @category.errors.full_messages}
         end
     end
 

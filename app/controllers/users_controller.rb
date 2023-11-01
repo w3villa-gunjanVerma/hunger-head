@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
     skip_before_action :authenticate_request, only: [:create]
     before_action :set_user, only: [:show, :update]
+
+
+    def initialize
+        @first_iteraction_with_cart = false
+    end
+
     def index
         @users = User.all
         render json: @users, status: :ok
@@ -13,6 +19,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            binding.pry
             puts "user has been created"
             render json: @user, status: :created
         else

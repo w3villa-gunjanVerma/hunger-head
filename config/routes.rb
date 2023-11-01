@@ -23,8 +23,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "cart", to: "cart#show"
-      post "/createcart", to: "cart#create_cart"
-      # post "cart", to: "cart#addToCart"
+      post "cart", to: "cart#addToCart"
       delete "cart", to: "cart#removeFromCart"
       put "cart", to: "cart#update_cart_quantity"
     end
